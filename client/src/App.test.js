@@ -9,17 +9,17 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-test("the  data", () => {
-  const thisData = response.json();
-   expect(fetchData()).resolves.toBe(response.json());
+test("the  data", async() => {
+  const thisData = await fetch(`http://localhost:5000/api/players`);
+  expect(thisData).toBeTruthy();
+   
 });
 
-test("Don't forget the Coach", () => {
-  //Arrange
-  const currentData = 101;
-  //Act
-  const actual = coachAndPlayers(currentData);
-  //Assert
-  expect(actual).toBe();
-
-})
+test("the fetch fails with an error", async () => {
+  expect.assertions(1);
+  try {
+    await fetch(`http://localhost:5000/api/players`);
+  } catch (e) {
+    expect(e).toMatch("error");
+  }
+});

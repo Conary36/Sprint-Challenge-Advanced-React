@@ -3,7 +3,7 @@ import './App.css';
 import PlayerCard from './components/PlayerCard';
 
 export const coachAndPlayers = totalPlayers =>{
-  return totalPlayers + 1;
+  return totalPlayers + newNum;
 }
 
 
