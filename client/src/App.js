@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PlayerCard from './components/PlayerCard';
 
-function App() {
+export const coachAndPlayers = totalPlayers =>{
+  return totalPlayers + 1;
+}
+
+
+class App extends React.Component {
+  constructor(){
+    super();
+  this.state = {
+    players: []
+  };
+}
+    componentDidMount(){
+      //data for players
+      fetch(`http://localhost:5000/api/players`)
+      .then(response => response.json())
+      .then(playerData => {
+          this.setState({
+            ...this.state, players: playerData
+          })
+          console.log(playerData)
+      })
+      .catch(err => {console.log('No data for player', err)})
+    };
+    
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {this.state.players.map(e => {
+        return(
+        <PlayerCard
+          name={e.name}
+          country={e.country}
+          searches={e.searches}
+        />
+        );
+      })}
     </div>
   );
+  }
 }
 
 export default App;
