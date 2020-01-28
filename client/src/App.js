@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import PlayerCard from './components/PlayerCard';
+import Navbar from './components/Navbar'
 
-export const coachAndPlayers = totalPlayers =>{
-  return totalPlayers + newNum;
-}
+// export const coachAndPlayers = totalPlayers =>{
+//   return totalPlayers + newNum;
+// }
 
 
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
+      <Navbar/>
       {this.state.players.map(e => {
         return(
         <PlayerCard
